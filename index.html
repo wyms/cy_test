@@ -1,0 +1,154 @@
+﻿<html lang=”en”>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Name of your awesome camera app -->
+	<title>Camera App</title>
+	<!-- Link to your main style sheet-->
+	<link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+	
+<iframe width="420" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+	
+</iframe>
+
+<iframe width="420" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY?version=3&loop=1&playlist=tgbNymZ7vqY">
+
+</iframe>
+
+
+	<!-- GPS -->
+	<p>Click the button to get your coordinates.</p>
+
+	<button onclick="getLocation()">Get GPS</button>
+
+	<p id="demo"></p>
+
+	<script>
+		var x = document.getElementById("demo");
+
+		function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else {
+				x.innerHTML = "Geolocation is not supported by this browser.";
+			}
+		}
+
+		function showPosition(position) {
+			x.innerHTML = "Latitude: " + position.coords.latitude +
+				"<br>Longitude: " + position.coords.longitude;
+		}
+	</script>
+
+
+	<!-- GPS end -->
+	<!-- source: http://www.w3.org/TR/html-media-capture/ -->
+
+
+	
+	
+	
+	<iframe id="inlineFrameExample"
+    title="Live Video Ft. Lauderdale"
+    width="600"
+    height="400"
+    src="https://i.ytimg.com/vi/_7DpZSy_biY/mqdefault_live.jpg">
+</iframe>
+
+
+	<iframe id="inlineFrameExample2"
+    title="Inline Frame Example ET"
+    width="300"
+    height="200"
+	src="https://www.youtube.com/watch?v=XnzxEGLaPxs">
+	</iframe>
+
+	<iframe id="inlineFrameExample2"
+    title="Inline Frame Example"
+    width="300"
+    height="200"
+	src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik">
+	</iframe>
+
+	<h1>Camera Test</h1>
+	<input type="file" id="mypic" accept="image/*" capture="camera">
+	<canvas></canvas>
+	<br>
+	<script>
+		var input = document.querySelector('input[type=file]'); // see Example 4
+		input.onchange = function () {
+			var file = input.files[0];
+			//upload(file);
+			drawOnCanvas(file);   // see Example 6
+			//displayAsImage(file); // see Example 7
+		};
+
+		function upload(file) {
+			var form = new FormData(),
+				xhr = new XMLHttpRequest();
+
+			form.append('image', file);
+			xhr.open('post', 'server.php', true);
+			xhr.send(form);
+		}
+
+		function drawOnCanvas(file) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				var dataURL = e.target.result,
+					c = document.querySelector('canvas'), // see Example 4
+					ctx = c.getContext('2d'),
+					img = new Image();
+
+				img.onload = function () {
+					c.width = img.width;
+					c.height = img.height;
+					ctx.drawImage(img, 0, 0);
+				};
+
+				img.src = dataURL;
+			};
+
+			reader.readAsDataURL(file);
+		}
+
+		
+
+		function displayAsImage(file) {
+			var imgURL = URL.createObjectURL(file),
+				img = document.createElement('img');
+
+			img.onload = function () {
+				URL.revokeObjectURL(imgURL);
+			};
+
+			img.src = imgURL;
+			document.body.appendChild(img);
+		}
+	</script>
+	<!-- source: http://www.w3.org/TR/html-media-capture/ -->
+	<!-- Camera -->
+	<main id="camera">
+		<!-- Camera sensor -->
+		<canvas id="camera--sensor"></canvas>
+		<!-- Camera view -->
+		<video id="camera--view" autoplay playsinline></video>
+		<!-- Camera output -->
+		<img src="//:0" alt="" id="camera--output">
+		<!-- Camera trigger -->
+		<button id="camera--trigger">Take a picture</button>
+	</main>
+	<!-- Reference to your JavaScript file -->
+	<script src="app.js"></script>
+
+
+
+
+</body>
+</html>
